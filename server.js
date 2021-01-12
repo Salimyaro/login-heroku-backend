@@ -31,7 +31,7 @@ app.post("/signup", (req, res) => {
   if (userList.find((user) => user.login === req.body.login)) {
     res.send({
       status: 409,
-      message: "Логин уже занят!",
+      message: "Еhe name is already taken!",
       data: null,
     });
     return;
@@ -39,7 +39,7 @@ app.post("/signup", (req, res) => {
   if (userList.find((user) => user.email === req.body.email)) {
     res.send({
       status: 409,
-      message: "email уже зарегистрирован!",
+      message: "Еhis email is already registered!",
       data: null,
     });
     return;
@@ -54,7 +54,7 @@ app.post("/signup", (req, res) => {
   userList.push(user);
   res.send({
     status: 200,
-    message: "Регистрация прошла удачно!",
+    message: "Registration completed successfully!",
     data: user,
   });
 });
@@ -64,7 +64,7 @@ app.post("/signin", (req, res) => {
   if (!user) {
     res.send({
       status: 404,
-      message: "email не найден!",
+      message: "Email not found!",
       data: null,
     });
     return;
@@ -72,7 +72,7 @@ app.post("/signin", (req, res) => {
   if (!(user.pass === req.body.pass)) {
     res.send({
       status: 400,
-      message: "Не верный пароль",
+      message: "Invalid password",
       data: null,
     });
     return;
@@ -80,7 +80,7 @@ app.post("/signin", (req, res) => {
   user.token = Date.now() * 2;
   res.send({
     status: 200,
-    message: "Вы авторизированы",
+    message: "You are logged in",
     data: user,
   });
 });
@@ -91,14 +91,14 @@ app.get("/logined", (req, res) => {
   ) {
     res.send({
       status: 401,
-      message: "Не авторизированный пользователь",
+      message: "Unauthorized user",
       data: null,
     });
     return;
   }
   res.send({
     status: 200,
-    message: "Авторизированный пользователь",
+    message: "Authorized user",
     data: hidePassFromUserList(),
   });
 });
@@ -107,7 +107,7 @@ app.delete("/logined", (req, res) => {
   userList.splice(userList.findIndex((user) => user.id === Number(req.body.id)), 1);
   res.send({
     status: 200,
-    message: "Пользователь удален",
+    message: "User deleted",
     data: hidePassFromUserList(),
   });
 });
